@@ -1,0 +1,22 @@
+{
+  "name": "flashcardgenerator",
+  "version": "1.0.0",
+  "description": "Node.js flash card creation program.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmann30/Flashcard-Generator.git"
+  },
+  "author": "Michael",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmann30/Flashcard-Generator/issues"
+  },
+  "homepage": "https://github.com/mmann30/Flashcard-Generator#readme",
+  "dependencies": {
+    "inquirer": "^3.2.0"
+  }
+}
