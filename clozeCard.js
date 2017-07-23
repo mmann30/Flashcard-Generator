@@ -13,3 +13,8 @@
 
 //   * Use prototypes to attach these methods, wherever possible.
 
+function ClozeCard() {
+
+}
+
+module.exports = ClozeCard;
