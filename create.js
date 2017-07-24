@@ -5,13 +5,13 @@ var inquirer = require("inquirer");
 var BasicCard = require("./basicCard.js");
 var ClozeCard = require("./clozeCard.js");
 
-function createMain() {
+function createMenu() {
 	inquirer.prompt([
 		{
 			type: "list",
 			name: "createMenu",
 			message: "What kind of flashcard would you like to make?",
-			choice: ["basic", "cloze"]
+			choices: ["basic", "cloze"]
 		}
 	]).then(function(results) {
 		if (results.createMenu === "basic") {
@@ -23,14 +23,52 @@ function createMain() {
 }
 
 function createBasic() {
-	//inquire user input for font,back
-	//create new instace of BasicCard
+	// Prompts user for font and back values of the flash card
+	inquirer.prompt([
+		{
+			type: "input",
+			name: "front",
+			message: "What would you like on the front of the card?",
+		},
+		{
+			type: "input",
+			name: "back",
+			message: "What would you like on the back of the card?",
+		}
+	]).then(function(results) {
+	// Create new instance of BasicCard
+		var basicCard = new BasicCard(results.front, results.back);
+		console.log(basicCard);
+		// Append/Push card to an array for storage
+	});
 }
 
 function createCloze() {
-	//inquire user input for text, cloze
-	//create new instace of ClozeCard
+	// Prompts user for full text and cloze values of the flash card
+	inquirer.prompt([
+		{
+			type: "input",
+			name: "text",
+			message: "What would you like the full text of the card to be?",
+		},
+		{
+			type: "input",
+			name: "cloze",
+			message: "What would you like redacted from the text?",
+		}
+	]).then(function(results) {
+		// Checks if the cloze is contained in the text
+		if (results.text.indexOf(results.cloze) <= 0) {
+			console.log("Error: " + results.text + " does not contain " + results.cloze);
+		} else {
+		// Create new instance of ClozeCard
+			var clozeCard = new ClozeCard(results.text, results.cloze);
+			console.log(clozeCard);
+			// Append/Push card to an array for storage
+		}	
+	});
 }
 
-
-module.exports = createMain;
+// Function for appending new card to file
+//append to file/array for storage
+module.exports = createMenu;

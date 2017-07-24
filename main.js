@@ -1,7 +1,7 @@
 // Flashcard Generator Main menu
 
 var inquirer = require("inquirer");
-var create = require("./create.js");
+var createMenu = require("./create.js");
 
 // Displays main menu
 function mainMenu() {
@@ -18,7 +18,7 @@ function mainMenu() {
 			console.log("Sorry, Play is currently offline");
 			mainMenu();
 		} else if (result.mainMenu === "Create") {
-			//run create()
+			createMenu();
 		} else {
 			return;
 		}
