@@ -1,7 +1,8 @@
-
-function BasicCards(front, back) {
+// Constructor function for a basic flash card with front (question) and
+// back (answer) sides.
+function BasicCard(front, back) {
 	this.front = front;
 	this.back = back;
 }
 
-module.exports = BasicCards;
+module.exports = BasicCard;
