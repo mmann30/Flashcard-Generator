@@ -1,8 +1,10 @@
 // Create flashcards
 
-// Require files and packages
+// require Node packages
 var inquirer = require("inquirer");
-var fs = require("fs");
+var jsonfile = require("jsonfile");
+
+// Require local files
 var BasicCard = require("./basicCard.js");
 var ClozeCard = require("./clozeCard.js");
 
@@ -41,8 +43,8 @@ function createBasic() {
 		var basicCard = new BasicCard(results.front, results.back);
 		console.log(basicCard);
 		
-		// Stores card in cardStorage.txt
-		storeCard(basicCard.front, basicCard.back);
+		// Stores newly created card in data.json
+		storeCard(basicCard);
 	});
 }
 
@@ -62,24 +64,23 @@ function createCloze() {
 	]).then(function(results) {
 		// Checks if the cloze is contained in the text
 		if (results.text.indexOf(results.cloze) >= 0) {
-			// Create new instance of ClozeCard
+			// Creates a new instance of ClozeCard
 			var clozeCard = new ClozeCard(results.text, results.cloze);
 			console.log(clozeCard);
 			
 			// Stores newly created card in cardStorage.txt
-			storeCard(clozeCard.partial, clozeCard.fullText, clozeCard.cloze);
+			storeCard(clozeCard);
 		} else {
 			console.log("Error: " + results.text + " does not contain " + results.cloze);
 		}	
 	});
 }
 
-// Stores the newly created card in cardStorage.txt
-function storeCard(front, back, cloze) {
-	fs.appendFile('cardStorage.txt', "\n" + front + ", "+ back + 
-		", " + cloze + ";", function(err) {
+// Stores the newly created card in data.json
+function storeCard(obj) {
+	jsonfile.writeFile("data.json", obj, {flag: 'a', spaces: 2}, function(err) {
 		if (err) {
-			return console.log("Error: " + err);
+			console.log("Error: " + err);
 		}
 	});
 }

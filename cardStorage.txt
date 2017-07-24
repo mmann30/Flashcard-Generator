@@ -1,8 +1,0 @@
-basic front,basic backtest Front, test back, undefined;
-
-basic front, basic back, undefined;
-something for front, somethign for back, undefined;
-undefined, ___ out stuff, test;
-Alaska is the largest state., ___ is the largest state., Alaska;
-Testing another basic card, This is the back of a basic card, undefined;
-Atlanta is the state capitol of ___., Atlanta is the state capitol of Georgia., Georgia;
