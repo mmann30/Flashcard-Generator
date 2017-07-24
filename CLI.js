@@ -13,7 +13,9 @@ function mainMenu() {
 			choices: ["Play", "Create", "Exit"]
 		}
 	]).then(function(result) {
+		
 		console.log(result.mainMenu);
+		
 		if (result.mainMenu === "Play") {
 			console.log("Sorry, Play is currently offline");
 			mainMenu();
@@ -22,6 +24,7 @@ function mainMenu() {
 		} else {
 			return;
 		}
+
 	});
 }
 

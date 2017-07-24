@@ -1,0 +1,17 @@
+{
+  "fullText": "FullText test",
+  "cloze": "test",
+  "partial": "FullText ___"
+}
+{
+  "front": "front test",
+  "back": "back test"
+}
+{
+  "front": "secod basic test",
+  "back": "second basic test"
+}
+{
+  "front": "test again",
+  "back": "test error"
+}
