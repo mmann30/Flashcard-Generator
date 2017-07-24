@@ -2,6 +2,7 @@
 
 // Require files and packages
 var inquirer = require("inquirer");
+var fs = require("fs");
 var BasicCard = require("./basicCard.js");
 var ClozeCard = require("./clozeCard.js");
 
@@ -36,10 +37,12 @@ function createBasic() {
 			message: "What would you like on the back of the card?",
 		}
 	]).then(function(results) {
-	// Create new instance of BasicCard
+		// Create new instance of BasicCard
 		var basicCard = new BasicCard(results.front, results.back);
 		console.log(basicCard);
-		// Append/Push card to an array for storage
+		
+		// Stores card in cardStorage.txt
+		storeCard(basicCard.front, basicCard.back);
 	});
 }
 
@@ -58,17 +61,27 @@ function createCloze() {
 		}
 	]).then(function(results) {
 		// Checks if the cloze is contained in the text
-		if (results.text.indexOf(results.cloze) <= 0) {
-			console.log("Error: " + results.text + " does not contain " + results.cloze);
-		} else {
-		// Create new instance of ClozeCard
+		if (results.text.indexOf(results.cloze) >= 0) {
+			// Create new instance of ClozeCard
 			var clozeCard = new ClozeCard(results.text, results.cloze);
 			console.log(clozeCard);
-			// Append/Push card to an array for storage
+			
+			// Stores newly created card in cardStorage.txt
+			storeCard(clozeCard.partial, clozeCard.fullText, clozeCard.cloze);
+		} else {
+			console.log("Error: " + results.text + " does not contain " + results.cloze);
 		}	
 	});
 }
 
-// Function for appending new card to file
-//append to file/array for storage
+// Stores the newly created card in cardStorage.txt
+function storeCard(front, back, cloze) {
+	fs.appendFile('cardStorage.txt', "\n" + front + ", "+ back + 
+		", " + cloze + ";", function(err) {
+		if (err) {
+			return console.log("Error: " + err);
+		}
+	});
+}
+
 module.exports = createMenu;
